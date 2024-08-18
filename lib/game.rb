@@ -5,7 +5,7 @@ class Game
   @@player_turn = 0
   @@players = []
   @@player_choices = {}
-  WIN_PATTERNS = ["123", "456", "789"]
+  WIN_PATTERNS = ["0123", "0456", "0789"]
 
   def initialize
     @@players = [Player.new, Player.new]
@@ -28,6 +28,8 @@ class Game
       win = @@player_choices.values.map{|pattern| WIN_PATTERNS.include?(pattern)}.include?(true)
 
       @@player_turn = @@player_turn == 0 ? 1 : 0
+      
     end while !win
+    puts "#{player_name} won!"
   end
 end
