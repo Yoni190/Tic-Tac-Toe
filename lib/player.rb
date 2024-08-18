@@ -3,8 +3,8 @@ class Player
 
   def initialize
     puts "What is your name?: "
-    name = gets.chomp
+    self.name = gets.chomp
     puts "What is your mark?: "
-    mark = gets.chomp
+    self.mark = gets.chomp
   end
 end
