@@ -5,3 +5,4 @@ class Player
     name = n
     mark = m
   end
+end
