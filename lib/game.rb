@@ -4,6 +4,7 @@ require_relative 'player'
 class Game
   @@player_turn = 0
   @@players = []
+  @@visited = []
   #WIN_PATTERNS = [123, 456, 789, 147, 258, 369, 159, 357]
   WIN_PATTERNS = [[1,2,3],[4,5,6],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
   CHOICES = %w(1 2 3 4 5 6 7 8 9 0)
@@ -22,17 +23,22 @@ class Game
       player_name = @@players[@@player_turn].name
       puts "#{player_name}, mark your mark"
       choice = gets.chomp
-      mark = @@players[@@player_turn].mark
-      board.mark_the_board(choice, mark)
-      @@player_choices[player_name] = @@player_choices[player_name] == nil ? choice : @@player_choices[player_name] + choice
-      
+      if @@visited.include?(choice)
+        puts "Choose from the available only"
+      else
+        @@visited.push(choice)
+        mark = @@players[@@player_turn].mark
+        board.mark_the_board(choice, mark)
+        @@player_choices[player_name] = @@player_choices[player_name] == nil ? choice : @@player_choices[player_name] + choice
+        
 
-      @@player_turn = @@player_turn == 0 ? 1 : 0
-      counter = counter == nil ? 1 : counter + 1
-      tie = tie?(counter)
-      
+        @@player_turn = @@player_turn == 0 ? 1 : 0
+        counter = counter == nil ? 1 : counter + 1
+        tie = tie?(counter)
+        
 
-      win = win?(@@player_choices[player_name])
+        win = win?(@@player_choices[player_name])
+      end
 
       
     end while !win && !tie
