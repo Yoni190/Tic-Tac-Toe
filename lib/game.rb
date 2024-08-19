@@ -5,14 +5,11 @@ class Game
   @@player_turn = 0
   @@players = []
   @@player_choices = {}
-  WIN_PATTERNS = ["0123", "0456", "0789"]
+  WIN_PATTERNS = [123, 456, 789, 147, 258, 369, 159, 357]
   CHOICES = %w(1 2 3 4 5 6 7 8 9 0)
-  counter = 0
 
   def initialize
     @@players = [Player.new, Player.new]
-    @@player_choices[@@players[0].name] = "0"
-    @@player_choices[@@players[1].name] = "0"
     play_game
   end
 
@@ -25,15 +22,15 @@ class Game
       choice = gets.chomp
       mark = @@players[@@player_turn].mark
       board.mark_the_board(choice, mark)
-      @@player_choices[player_name] += choice
+      @@player_choices[player_name] = @@player_choices[player_name] == nil ? choice : @@player_choices[player_name] + choice
       
-      #win = @@player_choices.values.map{|pattern| WIN_PATTERNS.include?(pattern)}.include?(true)
 
       @@player_turn = @@player_turn == 0 ? 1 : 0
-      counter += 1
+      counter = counter == nil ? 1 : counter + 1
+      win = win?(@@player_choices[player_name])
       
-    end while !win?(@@player_choices) || counter != 9
-    if win?(@@player_choices)
+    end while !win
+    if win?(@@player_choices[player_name])
       puts "#{player_name} won!"
     else
       puts "It's a tie"
@@ -41,7 +38,9 @@ class Game
   
   end
 
-  def win?(choices)
-    choices.values.map{|pattern| WIN_PATTERNS.include?(pattern)}.include?(true)
+  def win?(choice)
+
+    WIN_PATTERNS.include?(choice.to_i)
   end
+
 end
