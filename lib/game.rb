@@ -4,8 +4,8 @@ require_relative 'player'
 class Game
   @@player_turn = 0
   @@players = []
-  #@@player_choices = {}
-  WIN_PATTERNS = [123, 456, 789, 147, 258, 369, 159, 357]
+  #WIN_PATTERNS = [123, 456, 789, 147, 258, 369, 159, 357]
+  WIN_PATTERNS = [[1,2,3],[4,5,6],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
   CHOICES = %w(1 2 3 4 5 6 7 8 9 0)
 
   def initialize
@@ -52,8 +52,27 @@ class Game
   end
 
   def win?(choice)
+    i = 0
+    array_of_integers = change_to_array(choice)
+    
+    while i < WIN_PATTERNS.length
+      list = []
+      j = 0
+      while j < WIN_PATTERNS[i].length
+        list.push(array_of_integers.include?(WIN_PATTERNS[i][j]))
+        if list.count(true) == 3
+           return true
+        end
+        j += 1
+      end
+      i += 1
+    end
+    return false
+  end
 
-    WIN_PATTERNS.include?(choice.to_i)
+  def change_to_array(num)
+    array_of_integers = num.split("").map{|num| num.to_i}
+    array_of_integers
   end
 
   def tie?(counter)
