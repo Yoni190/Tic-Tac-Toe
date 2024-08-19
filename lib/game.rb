@@ -27,9 +27,14 @@ class Game
 
       @@player_turn = @@player_turn == 0 ? 1 : 0
       counter = counter == nil ? 1 : counter + 1
-      win = win?(@@player_choices[player_name])
+      tie = tie?(counter)
       
-    end while !win
+
+      win = win?(@@player_choices[player_name])
+
+      
+    end while !win && !tie
+
     if win?(@@player_choices[player_name])
       puts "#{player_name} won!"
     else
@@ -41,6 +46,10 @@ class Game
   def win?(choice)
 
     WIN_PATTERNS.include?(choice.to_i)
+  end
+
+  def tie?(counter)
+    counter == 9 ? true : false
   end
 
 end
