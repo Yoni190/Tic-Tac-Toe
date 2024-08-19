@@ -54,6 +54,7 @@ class Game
     puts "Continue?[Y/N]"
     response = gets.chomp
     if response.upcase == "Y"
+      @@visited = []
       play_game
     end
   
