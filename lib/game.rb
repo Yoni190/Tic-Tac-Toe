@@ -45,7 +45,8 @@ class Game
       puts "It's a tie"
     end
     puts "Continue?[Y/N]"
-    if gets.chomp == "Y"
+    response = gets.chomp
+    if response.upcase == "Y"
       play_game
     end
   
