@@ -4,7 +4,7 @@ require_relative 'player'
 class Game
   @@player_turn = 0
   @@players = []
-  @@player_choices = {}
+  #@@player_choices = {}
   WIN_PATTERNS = [123, 456, 789, 147, 258, 369, 159, 357]
   CHOICES = %w(1 2 3 4 5 6 7 8 9 0)
 
@@ -16,6 +16,8 @@ class Game
   def play_game
     board = Board.new
     board.display_board
+    @@player_choices = {}
+    
     begin
       player_name = @@players[@@player_turn].name
       puts "#{player_name}, mark your mark"
@@ -37,8 +39,14 @@ class Game
 
     if win?(@@player_choices[player_name])
       puts "#{player_name} won!"
+      @@players[@@player_turn].score += 1
+      puts "Score: #{@@players[0].score} : #{@@players[1].score}"
     else
       puts "It's a tie"
+    end
+    puts "Continue?[Y/N]"
+    if gets.chomp == "Y"
+      play_game
     end
   
   end
