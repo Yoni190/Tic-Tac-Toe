@@ -1,5 +1,4 @@
 class Board
-  attr_accessor :board
 
   def initialize 
   self.board =  "1 | 2 | 3\n" +
@@ -17,4 +16,7 @@ class Board
     board.sub!(choice, mark)
     puts board
   end
+
+  private
+  attr_accessor :board
 end
