@@ -1,5 +1,7 @@
+
+
 class Player
-  attr_accessor :name, :mark, :score
+  attr_reader :name, :mark, :score
 
   def initialize
     puts "What is your name?: "
@@ -8,4 +10,11 @@ class Player
     self.mark = gets.chomp
     self.score = 0
   end
+
+  def increment_score
+    self.score += 1
+  end
+
+  private
+  attr_writer :name, :mark, :score
 end

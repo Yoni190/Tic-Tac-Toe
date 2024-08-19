@@ -5,7 +5,7 @@ class Game
   @@player_turn = 0
   @@players = []
   @@visited = []
-  #WIN_PATTERNS = [123, 456, 789, 147, 258, 369, 159, 357]
+
   WIN_PATTERNS = [[1,2,3],[4,5,6],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
   CHOICES = %w(1 2 3 4 5 6 7 8 9 0)
 
@@ -45,8 +45,9 @@ class Game
 
     if win?(@@player_choices[player_name])
       puts "#{player_name} won!"
-      @@players[@@player_turn].score += 1
+      @@players[@@player_turn].increment_score
       puts "Score: #{@@players[0].score} : #{@@players[1].score}"
+
     else
       puts "It's a tie"
     end
