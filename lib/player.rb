@@ -1,5 +1,4 @@
-
-
+# This class contains the data relevant to a player of Tic-Tac-Toe.
 class Player
   attr_reader :name, :mark, :score
 
@@ -16,5 +15,6 @@ class Player
   end
 
   private
+
   attr_writer :name, :mark, :score
 end
