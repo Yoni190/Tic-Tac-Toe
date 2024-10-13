@@ -1,5 +1,7 @@
 # This class displayes the tic-tac-toe board and updates it when the players mark a place.player_choices[player_name]
 class Board
+  attr_reader :board
+
   def initialize
     self.board = "\t\t\s1 | 2 | 3\n
                  ---+---+---\n
@@ -19,5 +21,5 @@ class Board
 
   private
 
-  attr_accessor :board
+  attr_writer :board
 end

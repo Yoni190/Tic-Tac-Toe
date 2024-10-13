@@ -57,6 +57,8 @@ class Game
     play_game
   end
 
+  private
+
   def win?(choice)
     i = 0
     array_of_integers = change_to_array(choice)
